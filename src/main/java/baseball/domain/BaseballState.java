@@ -1,5 +1,5 @@
 package baseball.domain;
 
 public enum BaseballState {
-	BALL, NOTHING
+	BALL, STRIKE, NOTHING
 }

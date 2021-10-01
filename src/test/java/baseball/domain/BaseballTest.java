@@ -9,6 +9,12 @@ class BaseballTest {
 	private final Baseball baseball = new Baseball(1, 1);
 
 	@Test
+	void strike() {
+		BaseballState state = baseball.compareTo(new Baseball(1, 1));
+		assertThat(state).isEqualTo(BaseballState.STRIKE);
+	}
+
+	@Test
 	void ball() {
 		BaseballState state = baseball.compareTo(new Baseball(2, 1));
 		assertThat(state).isEqualTo(BaseballState.BALL);

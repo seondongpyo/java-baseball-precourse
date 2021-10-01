@@ -1,5 +1,7 @@
 package baseball.domain;
 
+import java.util.Objects;
+
 public class Baseball {
 
 	private final int position;
@@ -11,9 +13,27 @@ public class Baseball {
 	}
 
 	public BaseballState compareTo(Baseball baseball) {
-		if (number == baseball.number && position != baseball.position) {
+		if (this.equals(baseball)) {
+			return BaseballState.STRIKE;
+		}
+		if (number == baseball.number) {
 			return BaseballState.BALL;
 		}
 		return BaseballState.NOTHING;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Baseball baseball = (Baseball)o;
+		return position == baseball.position && number == baseball.number;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(position, number);
 	}
 }
