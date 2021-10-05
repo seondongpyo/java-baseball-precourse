@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import static baseball.domain.BaseballPosition.MAX_VALUE;
 import static baseball.domain.BaseballPosition.MIN_VALUE;
+import static baseball.domain.BaseballState.NOTHING;
 
 public class Baseballs {
 
@@ -36,13 +37,14 @@ public class Baseballs {
     }
 
     public BaseballState compareTo(Baseball target) {
-        for (Baseball baseball : baseballs) {
-            BaseballState state = baseball.compareTo(target);
-            if (state != BaseballState.NOTHING) {
-                return state;
-            }
+        BaseballState state = NOTHING;
+        int position = MIN_VALUE;
+        while (state.isNothing() && position <= MAX_VALUE) {
+            Baseball currentBaseball = baseballs.get(position - 1);
+            state = currentBaseball.compareTo(target);
+            position++;
         }
-        return BaseballState.NOTHING;
+        return state;
     }
 
     @Override
