@@ -1,11 +1,15 @@
 package baseball.domain;
 
+import baseball.exception.InvalidBallCountException;
 import baseball.exception.InvalidBaseballResultException;
+import baseball.exception.InvalidStrikeCountException;
 
 public class BaseballResult {
 
     private static final int MIN_COUNT = 0;
     private static final int MAX_COUNT = 3;
+    private static final int COUNT_ONE = 1;
+    private static final int COUNT_TWO = 2;
 
     private int strikeCount;
     private int ballCount;
@@ -15,19 +19,9 @@ public class BaseballResult {
     }
 
     public BaseballResult(int strikeCount, int ballCount) {
-        if (isInvalid(strikeCount) || isInvalid(ballCount) || isInvalidTotalCounts(strikeCount, ballCount)) {
-            throw new InvalidBaseballResultException(strikeCount, ballCount);
-        }
+        validateStrikeBallCounts(strikeCount, ballCount);
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
-    }
-
-    private boolean isInvalidTotalCounts(int strikeCount, int ballCount) {
-        return (strikeCount + ballCount > MAX_COUNT) || (strikeCount == 2 && ballCount == 1);
-    }
-
-    private boolean isInvalid(int count) {
-        return count < MIN_COUNT || count > MAX_COUNT;
     }
 
     public void add(BaseballState state) {
@@ -45,5 +39,25 @@ public class BaseballResult {
 
     public int ballCount() {
         return ballCount;
+    }
+
+    private void validateStrikeBallCounts(int strikeCount, int ballCount) {
+        if (isInvalidCount(strikeCount)) {
+            throw new InvalidStrikeCountException(strikeCount);
+        }
+        if (isInvalidCount(ballCount)) {
+            throw new InvalidBallCountException(ballCount);
+        }
+        if (isInvalidResultBy(strikeCount, ballCount)) {
+            throw new InvalidBaseballResultException(strikeCount, ballCount);
+        }
+    }
+
+    private boolean isInvalidResultBy(int strikeCount, int ballCount) {
+        return (strikeCount + ballCount > MAX_COUNT) || (strikeCount == COUNT_TWO && ballCount == COUNT_ONE);
+    }
+
+    private boolean isInvalidCount(int count) {
+        return count < MIN_COUNT || count > MAX_COUNT;
     }
 }

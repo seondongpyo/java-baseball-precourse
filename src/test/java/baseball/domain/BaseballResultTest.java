@@ -1,6 +1,8 @@
 package baseball.domain;
 
+import baseball.exception.InvalidBallCountException;
 import baseball.exception.InvalidBaseballResultException;
+import baseball.exception.InvalidStrikeCountException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +21,7 @@ class BaseballResultTest {
     @ParameterizedTest
     void invalid_strike_count(int strikeCount) {
         assertThatThrownBy(() -> new BaseballResult(strikeCount, 0))
-            .isInstanceOf(InvalidBaseballResultException.class);
+            .isInstanceOf(InvalidStrikeCountException.class);
     }
 
     @DisplayName("숫자 야구 게임 결과 생성 시 예외 - 볼의 개수는 0개 이상 3개 이하까지만 가능하다.")
@@ -27,7 +29,7 @@ class BaseballResultTest {
     @ParameterizedTest
     void invalid_ball_count(int ballCount) {
         assertThatThrownBy(() -> new BaseballResult(0, ballCount))
-            .isInstanceOf(InvalidBaseballResultException.class);
+            .isInstanceOf(InvalidBallCountException.class);
     }
 
     @DisplayName("숫자 야구 게임 결과 생성 시 예외 - 스트라이크와 볼의 개수의 합은 최대 3까지만 가능하다.")
