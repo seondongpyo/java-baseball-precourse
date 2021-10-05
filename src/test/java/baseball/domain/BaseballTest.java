@@ -1,6 +1,7 @@
 package baseball.domain;
 
 import baseball.exception.InvalidBaseballNumberException;
+import baseball.exception.InvalidBaseballPositionException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -32,6 +33,14 @@ class BaseballTest {
     void validPosition(int position) {
         Baseball baseball = new Baseball(1, position);
         assertThat(baseball).isEqualTo(new Baseball(1, position));
+    }
+
+    @DisplayName("위치 값이 1 이상 3 이하가 아닐 경우 예외가 발생한다.")
+    @ValueSource(ints = {0, 4})
+    @ParameterizedTest
+    void invalidPosition(int position) {
+        assertThatThrownBy(() -> new Baseball(1, position))
+            .isInstanceOf(InvalidBaseballPositionException.class);
     }
 
 }
