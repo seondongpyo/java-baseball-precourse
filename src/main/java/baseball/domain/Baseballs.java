@@ -35,7 +35,13 @@ public class Baseballs {
         return baseballs;
     }
 
-    public BaseballState compareTo(Baseball baseball) {
+    public BaseballState compareTo(Baseball target) {
+        for (Baseball baseball : baseballs) {
+            BaseballState state = baseball.compareTo(target);
+            if (state != BaseballState.NOTHING) {
+                return state;
+            }
+        }
         return BaseballState.NOTHING;
     }
 
