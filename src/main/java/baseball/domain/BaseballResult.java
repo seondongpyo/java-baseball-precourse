@@ -15,11 +15,15 @@ public class BaseballResult {
     }
 
     public BaseballResult(int strikeCount, int ballCount) {
-        if (strikeCount < MIN_COUNT || strikeCount > MAX_COUNT) {
+        if (isInvalid(strikeCount) || isInvalid(ballCount)) {
             throw new InvalidBaseballResultException(strikeCount, ballCount);
         }
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
+    }
+
+    private boolean isInvalid(int count) {
+        return count < MIN_COUNT || count > MAX_COUNT;
     }
 
     public void add(BaseballState state) {

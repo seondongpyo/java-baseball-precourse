@@ -2,7 +2,9 @@ package baseball.domain;
 
 import baseball.exception.InvalidBaseballResultException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -17,5 +19,12 @@ class BaseballResultTest {
             .isInstanceOf(InvalidBaseballResultException.class);
     }
 
+    @DisplayName("숫자 야구 게임 결과 생성 시 예외 - 볼의 개수는 0개 이상 3개 이하까지만 가능하다.")
+    @ValueSource(ints = {-1, 4})
+    @ParameterizedTest
+    void invalid_ball_count(int ballCount) {
+        assertThatThrownBy(() -> new BaseballResult(0, ballCount))
+            .isInstanceOf(InvalidBaseballResultException.class);
+    }
 
 }
