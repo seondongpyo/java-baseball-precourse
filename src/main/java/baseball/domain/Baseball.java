@@ -13,6 +13,9 @@ public class Baseball {
     }
 
     public BaseballState compareTo(Baseball baseball) {
+        if (this.equals(baseball)) {
+            return BaseballState.STRIKE;
+        }
         if (number.equals(baseball.number)) {
             return BaseballState.BALL;
         }

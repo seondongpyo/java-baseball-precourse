@@ -14,6 +14,13 @@ class BaseballTest {
 
     private final Baseball baseball = new Baseball(1, 1);
 
+    @DisplayName("야구공의 숫자와 위치가 같으면 '스트라이크'이다.")
+    @Test
+    void strike() {
+        BaseballState state = baseball.compareTo(new Baseball(1, 1));
+        assertThat(state).isEqualTo(BaseballState.STRIKE);
+    }
+
     @DisplayName("야구공의 숫자는 같지만 위치가 다르면 '볼'이다.")
     @Test
     void ball() {
