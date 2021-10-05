@@ -18,6 +18,14 @@ class BaseballsTest {
 
     private final Baseballs baseballs = new Baseballs(Arrays.asList(1, 2, 3));
 
+    @DisplayName("3스트라이크")
+    @Test
+    void strike3() {
+        BaseballResult result = baseballs.compareTo(new Baseballs(Arrays.asList(1, 2, 3)));
+        assertThat(result.strikeCount()).isEqualTo(3);
+        assertThat(result.ballCount()).isZero();
+    }
+
     @DisplayName("2스트라이크")
     @Test
     void strike2() {
