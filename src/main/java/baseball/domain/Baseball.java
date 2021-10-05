@@ -1,27 +1,15 @@
 package baseball.domain;
 
-import baseball.exception.InvalidBaseballPositionException;
-
 import java.util.Objects;
 
 public class Baseball {
 
-    private static final int MIN_POSITION = 1;
-    private static final int MAX_POSITION = 3;
-
     private final BaseballNumber number;
-    private final int position;
+    private final BaseballPosition position;
 
     public Baseball(int number, int position) {
-        validateBaseballPosition(position);
         this.number = new BaseballNumber(number);
-        this.position = position;
-    }
-
-    private void validateBaseballPosition(int position) {
-        if (position < MIN_POSITION || position > MAX_POSITION) {
-            throw new InvalidBaseballPositionException(position);
-        }
+        this.position = new BaseballPosition(position);
     }
 
     @Override
@@ -29,7 +17,7 @@ public class Baseball {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Baseball baseball = (Baseball) o;
-        return position == baseball.position && Objects.equals(number, baseball.number);
+        return Objects.equals(number, baseball.number) && Objects.equals(position, baseball.position);
     }
 
     @Override
