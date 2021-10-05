@@ -17,6 +17,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class BaseballsTest {
 
     private final Baseballs baseballs = new Baseballs(Arrays.asList(1, 2, 3));
+    
+    @DisplayName("1스트라이크")
+    @Test
+    void strike1() {
+        BaseballResult result = baseballs.compareTo(new Baseballs(Arrays.asList(1, 4, 5)));
+        assertThat(result.strikeCount()).isEqualTo(1);
+        assertThat(result.ballCount()).isZero();
+    }
 
     @DisplayName("야구공 묶음 안에 전달한 야구공의 숫자와 위치가 모두 일치하는 야구공이 존재하면 '스트라이크'이다.")
     @Test

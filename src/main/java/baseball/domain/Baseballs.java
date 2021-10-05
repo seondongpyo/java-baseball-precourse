@@ -36,6 +36,15 @@ public class Baseballs {
         return baseballs;
     }
 
+    public BaseballResult compareTo(Baseballs targets) {
+        BaseballResult result = new BaseballResult();
+        for (Baseball baseball : baseballs) {
+            BaseballState state = targets.compareTo(baseball);
+            result.add(state);
+        }
+        return result;
+    }
+
     public BaseballState compareTo(Baseball target) {
         BaseballState state = NOTHING;
         int position = MIN_VALUE;
