@@ -18,6 +18,13 @@ class BaseballsTest {
 
     private final Baseballs baseballs = new Baseballs(Arrays.asList(1, 2, 3));
 
+    @DisplayName("야구공 묶음 안에 전달한 야구공의 숫자와 위치가 모두 일치하는 야구공이 존재하면 '스트라이크'이다.")
+    @Test
+    void strike() {
+        BaseballState state = baseballs.compareTo(new Baseball(1, 1));
+        assertThat(state).isEqualTo(BaseballState.STRIKE);
+    }
+
     @DisplayName("야구공 묶음 안에 전달한 야구공의 숫자와 일치하지만 위치가 다른 야구공이 존재하면 '볼'이다.")
     @Test
     void ball() {
