@@ -17,6 +17,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class BaseballsTest {
 
     private final Baseballs baseballs = new Baseballs(Arrays.asList(1, 2, 3));
+
+    @DisplayName("1스트라이크 1볼")
+    @Test
+    void strike1_ball1() {
+        BaseballResult result = baseballs.compareTo(new Baseballs(Arrays.asList(1, 3, 4)));
+        assertThat(result.strikeCount()).isEqualTo(1);
+        assertThat(result.ballCount()).isEqualTo(1);
+    }
     
     @DisplayName("1스트라이크")
     @Test

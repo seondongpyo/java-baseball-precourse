@@ -9,6 +9,9 @@ public class BaseballResult {
         if (state.isStrike()) {
             strikeCount++;
         }
+        if (state.isBall()) {
+            ballCount++;
+        }
     }
 
     public int strikeCount() {
