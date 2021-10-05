@@ -2,6 +2,7 @@ package baseball.domain;
 
 import baseball.exception.InvalidBaseballResultException;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -41,5 +42,12 @@ class BaseballResultTest {
         return Stream.of(
             Arguments.of(1, 3), Arguments.of(2, 2), Arguments.of(3, 1)
         );
+    }
+
+    @DisplayName("숫자 야구 게임 결과 생성 시 예외 - 2스트라이크 1볼은 존재할 수 없는 결과이다.")
+    @Test
+    void strike2_ball1_is_invalid() {
+        assertThatThrownBy(() -> new BaseballResult(2, 1))
+            .isInstanceOf(InvalidBaseballResultException.class);
     }
 }

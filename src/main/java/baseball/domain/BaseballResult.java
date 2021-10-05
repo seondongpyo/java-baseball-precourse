@@ -23,7 +23,7 @@ public class BaseballResult {
     }
 
     private boolean isInvalidTotalCounts(int strikeCount, int ballCount) {
-        return strikeCount + ballCount > MAX_COUNT;
+        return (strikeCount + ballCount > MAX_COUNT) || (strikeCount == 2 && ballCount == 1);
     }
 
     private boolean isInvalid(int count) {
