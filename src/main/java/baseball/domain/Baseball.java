@@ -1,13 +1,25 @@
 package baseball.domain;
 
+import baseball.exception.InvalidBaseballNumberException;
+
 import java.util.Objects;
 
 public class Baseball {
 
+    private static final int MIN_NUMBER = 1;
+    private static final int MAX_NUMBER = 9;
+
     private final int number;
 
     public Baseball(int number) {
+        validateBaseballNumber(number);
         this.number = number;
+    }
+
+    private void validateBaseballNumber(int number) {
+        if (number < MIN_NUMBER || number > MAX_NUMBER) {
+            throw new InvalidBaseballNumberException(number);
+        }
     }
 
     @Override
