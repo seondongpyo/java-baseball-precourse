@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Baseball {
 
-    private final BaseballNumber number;
     private final BaseballPosition position;
+    private final BaseballNumber number;
 
-    public Baseball(int number, int position) {
-        this.number = new BaseballNumber(number);
+    public Baseball(int position, int number) {
         this.position = new BaseballPosition(position);
+        this.number = new BaseballNumber(number);
     }
 
     public BaseballState compareTo(Baseball baseball) {
@@ -24,11 +24,11 @@ public class Baseball {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Baseball baseball = (Baseball) o;
-        return Objects.equals(number, baseball.number) && Objects.equals(position, baseball.position);
+        return Objects.equals(position, baseball.position) && Objects.equals(number, baseball.number);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, position);
+        return Objects.hash(position, number);
     }
 }
