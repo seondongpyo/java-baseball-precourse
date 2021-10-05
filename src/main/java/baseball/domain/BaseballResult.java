@@ -15,11 +15,15 @@ public class BaseballResult {
     }
 
     public BaseballResult(int strikeCount, int ballCount) {
-        if (isInvalid(strikeCount) || isInvalid(ballCount)) {
+        if (isInvalid(strikeCount) || isInvalid(ballCount) || isInvalidTotalCounts(strikeCount, ballCount)) {
             throw new InvalidBaseballResultException(strikeCount, ballCount);
         }
         this.strikeCount = strikeCount;
         this.ballCount = ballCount;
+    }
+
+    private boolean isInvalidTotalCounts(int strikeCount, int ballCount) {
+        return strikeCount + ballCount > MAX_COUNT;
     }
 
     private boolean isInvalid(int count) {
