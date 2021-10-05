@@ -16,6 +16,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BaseballsTest {
 
+    @DisplayName("야구공 묶음 안에 전달한 야구공의 숫자와 일치하는 야구공이 존재하지 않으면 '낫싱'이다.")
+    @Test
+    void nothing() {
+        Baseballs baseballs = new Baseballs(Arrays.asList(1, 2, 3));
+        BaseballState state = baseballs.compareTo(new Baseball(1, 4));
+        assertThat(state).isEqualTo(BaseballState.NOTHING);
+    }
+
     @DisplayName("3개의 숫자로 야구공 묶음을 생성한다.")
     @Test
     void create() {

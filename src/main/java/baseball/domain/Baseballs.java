@@ -35,6 +35,10 @@ public class Baseballs {
         return baseballs;
     }
 
+    public BaseballState compareTo(Baseball baseball) {
+        return BaseballState.NOTHING;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
