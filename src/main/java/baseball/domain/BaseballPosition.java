@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class BaseballPosition {
 
-    private static final int MIN_VALUE = 1;
-    private static final int MAX_VALUE = 3;
+    public static final int MIN_VALUE = 1;
+    public static final int MAX_VALUE = 3;
 
     private final int value;
 
