@@ -11,11 +11,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class BaseballTest {
+
+    private final Baseball baseball = new Baseball(1, 1);
+
+    @DisplayName("야구공의 숫자는 같지만 위치가 다르면 '볼'이다.")
+    @Test
+    void ball() {
+        BaseballState state = baseball.compareTo(new Baseball(1, 2));
+        assertThat(state).isEqualTo(BaseballState.BALL);
+    }
     
     @DisplayName("야구공의 숫자가 일치하지 않으면 '낫싱'이다.")
     @Test
     void nothing() {
-        Baseball baseball = new Baseball(1, 1);
         BaseballState state = baseball.compareTo(new Baseball(2, 2));
         assertThat(state).isEqualTo(BaseballState.NOTHING);
     }
