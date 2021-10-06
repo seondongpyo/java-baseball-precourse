@@ -1,7 +1,7 @@
 package baseball.view;
 
+import baseball.domain.BaseballNumberString;
 import baseball.domain.UserChoice;
-import baseball.utils.ValidationUtils;
 import nextstep.utils.Console;
 
 public class InputView {
@@ -12,15 +12,14 @@ public class InputView {
     private InputView() {
     }
 
-    public static String numberText() {
+    public static BaseballNumberString numberString() {
         System.out.print(MESSAGE_INPUT_NUMBERS);
         String text = Console.readLine();
         try {
-            ValidationUtils.validateIfValidAsBaseballNumber(text);
-            return text;
+            return BaseballNumberString.from(text);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return numberText();
+            return numberString();
         }
     }
 

@@ -21,24 +21,21 @@ public class Application {
         BaseballResult result = new BaseballResult();
 
         while (!result.isFinish()) {
-            String numberText = InputView.numberText();
-            Baseballs userBaseballs = new Baseballs(createNumbers(numberText));
+            BaseballNumberString numberString = InputView.numberString();
+            Baseballs userBaseballs = new Baseballs(numberString.toNumbers());
             result = computerBaseballs.compareTo(userBaseballs);
             ResultView.show(result);
         }
     }
 
-    private static List<Integer> createNumbers(String numberText) {
-        List<Integer> numbers = new ArrayList<>();
-        for (char number : numberText.toCharArray()) {
-            numbers.add(Integer.parseInt(String.valueOf(number)));
-        }
-        return numbers;
+    private static boolean isGameOver() {
+        UserChoice choice = InputView.restartOrQuit();
+        return choice.isGameOver();
     }
 
     private static List<Integer> createRandomNumbers() {
         List<Integer> numbers = new ArrayList<>();
-        while (numbers.size() < BaseballPosition.MAX_VALUE) {
+        while (numbers.size() < Baseballs.VALID_SIZE) {
             int randomNumber = Randoms.pickNumberInRange(BaseballNumber.MIN_VALUE, BaseballNumber.MAX_VALUE);
             addNumberIfNotDuplicate(numbers, randomNumber);
         }
@@ -50,11 +47,6 @@ public class Application {
             return;
         }
         numbers.add(number);
-    }
-
-    private static boolean isGameOver() {
-        UserChoice choice = InputView.restartOrQuit();
-        return choice.isGameOver();
     }
 
 }
