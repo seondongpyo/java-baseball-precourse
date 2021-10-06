@@ -3,6 +3,7 @@ package baseball;
 import baseball.domain.BaseballNumber;
 import baseball.domain.BaseballPosition;
 import baseball.domain.Baseballs;
+import baseball.view.InputView;
 import nextstep.utils.Randoms;
 
 import java.util.ArrayList;
@@ -11,24 +12,25 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        List<Integer> computerBaseballNumbers = createRandomBaseballNumbers();
-        Baseballs computerBaseballs = new Baseballs(computerBaseballNumbers);
+        List<Integer> computerNumbers = createRandomNumbers();
+        Baseballs computerBaseballs = new Baseballs(computerNumbers);
+        String numberText = InputView.numberText();
     }
 
-    private static List<Integer> createRandomBaseballNumbers() {
-        List<Integer> baseballNumbers = new ArrayList<>();
-        while (baseballNumbers.size() < BaseballPosition.MAX_VALUE) {
+    private static List<Integer> createRandomNumbers() {
+        List<Integer> numbers = new ArrayList<>();
+        while (numbers.size() < BaseballPosition.MAX_VALUE) {
             int randomNumber = Randoms.pickNumberInRange(BaseballNumber.MIN_VALUE, BaseballNumber.MAX_VALUE);
-            addNumberIfNotDuplicate(baseballNumbers, randomNumber);
+            addNumberIfNotDuplicate(numbers, randomNumber);
         }
-        return baseballNumbers;
+        return numbers;
     }
 
-    private static void addNumberIfNotDuplicate(List<Integer> baseballNumbers, int number) {
-        if (baseballNumbers.contains(number)) {
+    private static void addNumberIfNotDuplicate(List<Integer> numbers, int number) {
+        if (numbers.contains(number)) {
             return;
         }
-        baseballNumbers.add(number);
+        numbers.add(number);
     }
 
 }

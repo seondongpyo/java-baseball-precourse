@@ -12,7 +12,7 @@ import static baseball.domain.BaseballState.NOTHING;
 
 public class Baseballs {
 
-    private static final int VALID_SIZE = 3;
+    public static final int VALID_SIZE = 3;
 
     private final List<Baseball> baseballs;
 
