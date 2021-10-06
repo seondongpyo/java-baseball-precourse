@@ -1,5 +1,6 @@
 package baseball.view;
 
+import baseball.domain.UserChoice;
 import baseball.utils.ValidationUtils;
 import nextstep.utils.Console;
 
@@ -23,12 +24,11 @@ public class InputView {
         }
     }
 
-    public static String restartOrQuit() {
+    public static UserChoice restartOrQuit() {
         System.out.println(MESSAGE_RESTART_OR_QUIT);
         String text = Console.readLine();
         try {
-            ValidationUtils.validateIfValidAsUserChoice(text);
-            return text;
+            return new UserChoice(text);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return restartOrQuit();

@@ -25,13 +25,6 @@ public class ValidationUtils {
         }
     }
 
-    public static void validateIfValidAsUserChoice(String text) {
-        UserChoice choice = new UserChoice(text);
-        if (choice.isInvalid()) {
-            throw new InvalidUserChoiceException();
-        }
-    }
-
     private static boolean isNotThreeDigitNumber(String text) {
         return !text.matches(REGEX_FOR_THREE_DIGIT_NUMBER);
     }

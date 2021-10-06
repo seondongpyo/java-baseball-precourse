@@ -53,8 +53,7 @@ public class Application {
     }
 
     private static boolean isGameOver() {
-        String text = InputView.restartOrQuit();
-        UserChoice choice = new UserChoice(text);
+        UserChoice choice = InputView.restartOrQuit();
         return choice.isGameOver();
     }
 

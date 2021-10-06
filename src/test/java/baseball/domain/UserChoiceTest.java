@@ -1,11 +1,13 @@
 package baseball.domain;
 
+import baseball.exception.InvalidUserChoiceException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class UserChoiceTest {
 
@@ -23,12 +25,12 @@ class UserChoiceTest {
         assertThat(choice.isGameOver()).isTrue();
     }
 
-    @DisplayName("유효하지 않은 입력값")
+    @DisplayName("유효하지 않은 입력값일 경우 예외가 발생한다.")
     @ValueSource(strings = {"12", "3", "x", "!", "끝"})
     @ParameterizedTest
     void invalid(String inputValue) {
-        UserChoice choice = new UserChoice(inputValue);
-        assertThat(choice.isInvalid()).isTrue();
+        assertThatThrownBy(() -> new UserChoice(inputValue))
+            .isInstanceOf(InvalidUserChoiceException.class);
     }
 
 }

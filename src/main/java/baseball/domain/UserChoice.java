@@ -1,5 +1,7 @@
 package baseball.domain;
 
+import baseball.exception.InvalidUserChoiceException;
+
 public class UserChoice {
 
     public static final String NEW_GAME = "1";
@@ -8,7 +10,14 @@ public class UserChoice {
     private final String choice;
 
     public UserChoice(String choice) {
+        validateChoice(choice);
         this.choice = choice;
+    }
+
+    private void validateChoice(String choice) {
+        if (isInvalid(choice)) {
+            throw new InvalidUserChoiceException();
+        }
     }
 
     public boolean isNewGame() {
@@ -19,7 +28,7 @@ public class UserChoice {
         return choice.equals(GAME_OVER);
     }
 
-    public boolean isInvalid() {
-        return !isNewGame() && !isGameOver();
+    private boolean isInvalid(String inputValue) {
+        return !inputValue.equals(NEW_GAME) && !inputValue.equals(GAME_OVER);
     }
 }
