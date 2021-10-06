@@ -1,9 +1,6 @@
 package baseball;
 
-import baseball.domain.BaseballNumber;
-import baseball.domain.BaseballPosition;
-import baseball.domain.BaseballResult;
-import baseball.domain.Baseballs;
+import baseball.domain.*;
 import baseball.view.InputView;
 import baseball.view.ResultView;
 import nextstep.utils.Randoms;
@@ -14,6 +11,12 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
+        do {
+            playNewGame();
+        } while (!isGameOver());
+    }
+
+    private static void playNewGame() {
         Baseballs computerBaseballs = new Baseballs(createRandomNumbers());
         BaseballResult result = new BaseballResult();
 
@@ -47,6 +50,12 @@ public class Application {
             return;
         }
         numbers.add(number);
+    }
+
+    private static boolean isGameOver() {
+        String text = InputView.restartOrQuit();
+        UserChoice choice = new UserChoice(text);
+        return choice.isGameOver();
     }
 
 }
