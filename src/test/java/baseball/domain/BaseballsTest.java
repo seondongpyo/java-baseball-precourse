@@ -1,5 +1,6 @@
 package baseball.domain;
 
+import baseball.exception.DuplicateNumberException;
 import baseball.exception.InvalidBaseballsSizeException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -116,6 +117,14 @@ class BaseballsTest {
     void create() {
         Baseballs baseballs = new Baseballs(Arrays.asList(1, 2, 3));
         assertThat(baseballs).isEqualTo(new Baseballs(Arrays.asList(1, 2, 3)));
+    }
+
+    @DisplayName("야구공 묶음 생성 시 중복된 숫자가 존재할 경우 예외가 발생한다.")
+    @Test
+    void duplicate() {
+        List<Integer> numbers = Arrays.asList(1, 1, 2);
+        assertThatThrownBy(() -> new Baseballs(numbers))
+            .isInstanceOf(DuplicateNumberException.class);
     }
 
     @DisplayName("야구공 묶음 생성 시 숫자의 개수가 3개가 아니라면 예외가 발생한다.")

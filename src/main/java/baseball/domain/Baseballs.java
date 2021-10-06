@@ -1,10 +1,9 @@
 package baseball.domain;
 
+import baseball.exception.DuplicateNumberException;
 import baseball.exception.InvalidBaseballsSizeException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import static baseball.domain.BaseballPosition.MAX_VALUE;
 import static baseball.domain.BaseballPosition.MIN_VALUE;
@@ -17,14 +16,19 @@ public class Baseballs {
     private final List<Baseball> baseballs;
 
     public Baseballs(List<Integer> numbers) {
-        validateSizeOfNumbers(numbers);
+        validateNumbers(numbers);
         this.baseballs = createBaseballs(numbers);
     }
 
-    private void validateSizeOfNumbers(List<Integer> numbers) {
+    private void validateNumbers(List<Integer> numbers) {
         int sizeOfNumbers = numbers.size();
         if (sizeOfNumbers != VALID_SIZE) {
             throw new InvalidBaseballsSizeException(sizeOfNumbers);
+        }
+
+        Set<Integer> nonDuplicateNumbers = new HashSet<>(numbers);
+        if (nonDuplicateNumbers.size() != VALID_SIZE) {
+            throw new DuplicateNumberException();
         }
     }
 
