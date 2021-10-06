@@ -2,8 +2,10 @@ package baseball;
 
 import baseball.domain.BaseballNumber;
 import baseball.domain.BaseballPosition;
+import baseball.domain.BaseballResult;
 import baseball.domain.Baseballs;
 import baseball.view.InputView;
+import baseball.view.ResultView;
 import nextstep.utils.Randoms;
 
 import java.util.ArrayList;
@@ -12,9 +14,23 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        List<Integer> computerNumbers = createRandomNumbers();
-        Baseballs computerBaseballs = new Baseballs(computerNumbers);
-        String numberText = InputView.numberText();
+        Baseballs computerBaseballs = new Baseballs(createRandomNumbers());
+        BaseballResult result = new BaseballResult();
+
+        while (!result.isFinish()) {
+            String numberText = InputView.numberText();
+            Baseballs userBaseballs = new Baseballs(createNumbers(numberText));
+            result = computerBaseballs.compareTo(userBaseballs);
+            ResultView.show(result);
+        }
+    }
+
+    private static List<Integer> createNumbers(String numberText) {
+        List<Integer> numbers = new ArrayList<>();
+        for (char number : numberText.toCharArray()) {
+            numbers.add(Integer.parseInt(String.valueOf(number)));
+        }
+        return numbers;
     }
 
     private static List<Integer> createRandomNumbers() {

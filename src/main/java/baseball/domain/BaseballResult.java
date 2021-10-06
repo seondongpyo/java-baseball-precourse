@@ -41,6 +41,22 @@ public class BaseballResult {
         return ballCount;
     }
 
+    public boolean isFinish() {
+        return strikeCount == MAX_COUNT;
+    }
+
+    public boolean hasStrike() {
+        return strikeCount > MIN_COUNT;
+    }
+
+    public boolean hasBall() {
+        return ballCount > MIN_COUNT;
+    }
+
+    public boolean isNothing() {
+        return !hasStrike() && !hasBall();
+    }
+
     private void validateStrikeBallCounts(int strikeCount, int ballCount) {
         if (isInvalidCount(strikeCount)) {
             throw new InvalidStrikeCountException(strikeCount);
