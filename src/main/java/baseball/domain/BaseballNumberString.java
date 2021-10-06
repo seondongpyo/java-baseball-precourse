@@ -35,7 +35,7 @@ public class BaseballNumberString {
     private static boolean hasDuplicateNumber(String inputValue) {
         Set<Integer> numbers = new HashSet<>();
         for (char number : inputValue.toCharArray()) {
-            numbers.add(Integer.parseInt(String.valueOf(number)));
+            numbers.add(Character.getNumericValue(number));
         }
         return numbers.size() != Baseballs.VALID_SIZE;
     }
@@ -43,7 +43,7 @@ public class BaseballNumberString {
     public List<Integer> toNumbers() {
         List<Integer> numbers = new ArrayList<>();
         for (char number : numberString.toCharArray()) {
-            numbers.add(Integer.parseInt(String.valueOf(number)));
+            numbers.add(Character.getNumericValue(number));
         }
         return numbers;
     }
